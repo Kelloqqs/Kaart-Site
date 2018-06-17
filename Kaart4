@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>agNOVA3</title>
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="jquery-2.1.1.min.js"></script>
+<style>
+#map {
+    width: 960px;
+    height:500px;
+}
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+    background: #e93434;
+    color: #ffffff;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+<script>
+
+  var map = L.map('map',{
+    center: [52.370216, 4.895168],
+    zoom: 7,
+    });
+
+    var         osmMap = L.tileLayer(osmUrl, {attribution: osmAttrib}),
+                landMap = L.tileLayer(landUrl, {attribution: thunAttrib});
+
+    L.tileLayer('http://tile.stamen.com/toner-background/{z}/{x}/{y}.png', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+
+
+
+var firefoxIcon = L.icon({
+    iconUrl: 'AG.svg',
+    iconSize: [19, 48], // size of the icon
+    popupAnchor: [0,-15]
+    });
+
+var customOptions =
+         {
+         'maxWidth': '500',
+         'className' : 'custom'
+         }
+
+var breecamp = L.marker([52.379189, 4.899431], {icon: firefoxIcon}).bindPopup('<a href="http://agnova.eu/portfolio/woningen-in-breecamp-noord-zwolle/"> Zwolle Breecamp').addTo(map);
+var haarlem = L.marker([52.1561113, 5.3878266], {icon: firefoxIcon}).bindPopup('<a href="http://agnova.eu/portfolio/transformatie-postkantoor-zijlstraat-haarlem/">Amsterdam VBW').addTo(map);
+var cps = L.marker([52.173079, 5.4214773], {icon: firefoxIcon}).bindPopup('<a href="http://agnova.eu/portfolio/transformatie-postkantoor-zijlstraat-haarlem/">Amsterdam VBW').addTo(map);
+
+var cities = L.layerGroup([breecamp, haarlem]);
+var dingen = L.layerGroup([cps]);
+
+var baseMaps = {
+    "OSM Mapnik": osmMap,
+    "Landscape": landMap
+};
+
+var overlayMaps  = {
+  "Cities": cities,
+  "Dingen": dingen
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+</script>
+
+</body>
+
+</html>
